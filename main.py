@@ -11,7 +11,7 @@ import random
 
 # functions start here
 
-def weclomePlayer():
+def weclomePlayer(): # welcomes the user
 
     userName = input("Hey, What's your name?: ")
     return "Hey " + userName + "!"
@@ -20,7 +20,7 @@ def weclomePlayer():
 ifPlay = True
 
 
-def askPlayer():
+def askPlayer(): # asks the user if they want to play
 
     global ifPlay
     player = input("Would you like to play? [Y/N]: ")
@@ -70,7 +70,7 @@ def player():  # getting the player choice
         return playerChoice
 
 computerChoice = 0
-def computer():
+def computer(): # getting the computer choice
         global computerChoice
         computerChoice = int(random.randint(1,3))
         if computerChoice == 1:
@@ -86,7 +86,7 @@ playerScore = 0
 computerScore = 0
 tieScore = 0
 
-def winner():
+def winner(): # finding & displaying the winner
 
     global playerScore
     global computerScore
@@ -114,6 +114,10 @@ def winner():
         print("You win!")
         playerScore += 1
 
+# functions end here ---->
+
+# main code starts here ---->
+
 print(weclomePlayer())
 askPlayer()
 while ifPlay == True:
@@ -131,3 +135,5 @@ while ifPlay == True:
         break
 print()
 input("Press Enter to Exit...")
+
+# main code ends here ---->
