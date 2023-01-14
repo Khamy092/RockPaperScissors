@@ -1,19 +1,17 @@
-# AppName: Rock, Paper & Scissors Game
+# Name: Rock, Paper & Scissors Game
 # Developed by Taqi Khaliqdad @ www.taqi.au
 # Date: 12/01/2023
-
-
-
+# Version: 1.0.0
+# Description: A simple Rock, Paper & Scissors game made in Python 3.9.1
 
 # code starts here
-# main modules imported
+# required modules imported
 
 import random
 
-
 # functions start here
 
-def weclomeUser():
+def weclomePlayer():
 
     userName = input("Hey, What's your name?: ")
     return "Hey " + userName + "!"
@@ -21,85 +19,115 @@ def weclomeUser():
 
 ifPlay = True
 
-def askUser():
+
+def askPlayer():
 
     global ifPlay
     player = input("Would you like to play? [Y/N]: ")
     if player == "y" or player == "yes" or player == "YES" or player == "Y":
         ifPlay = True
-    else:
+    elif player == "n" or player == "no" or player == "NO" or player == "N":
         ifPlay = False
+        print()
+        print("No problem, see you next time!")
+    else:
+        print("Please enter a valid input!")
+        askPlayer()
 
-def showOptions():
+
+def showOptions():  # shows the options to the user
 
     if ifPlay == True:
 
         print("""
-        
+
     1 ---> Rock
     2 ---> Paper
     3 ---> Scissors
-        
+
             """)
 
+playerChoice = 0
+def player():  # getting the player choice
 
-def userChoice():
+    global playerChoice
+    playerChoice = int(input("Please enter your choice [1, 2 or 3]: "))
 
-    userChoice = int(input("Please enter your choice [1, 2 or 3]: "))
-    if ifPlay == True:
-        if userChoice == 1 or userChoice == 2 or userChoice == 3:
-            if userChoice == 1:
-                print("You chose Rock")
-            elif userChoice == 2:
-                print("You chose Paper")
-            elif userChoice == 3:
-                print("You chose Scissors")
-            return userChoice
+    # user input validation ----> if incorrect
+    while playerChoice != 1 and playerChoice != 2 and playerChoice != 3:
+        print("Please enter a valid input!")
+        playerChoice = int(input("Please enter your choice [1, 2 or 3]: "))
 
-computerChoice = ""
+    # player input validation ----> if correct
+    if playerChoice == 1 or playerChoice == 2 or playerChoice == 3:
+        if ifPlay == True:
+            if playerChoice == 1:
+                    print("You chose Rock.")
+            elif playerChoice == 2:
+                print("You chose Paper.")
+            elif playerChoice == 3:
+                print("You chose Scissors.")
+        return playerChoice
 
-def computerChoice():
-
-    global computerChoice
-
-    if ifPlay == True:
-        computerChoice = random.randint(1,3)
+computerChoice = 0
+def computer():
+        global computerChoice
+        computerChoice = int(random.randint(1,3))
         if computerChoice == 1:
-            print("Computer chose Rock")
+            print("Computer chose Rock.")
         elif computerChoice == 2:
-            print("Computer chose Paper")
+            print("Computer chose Paper.")
         elif computerChoice == 3:
-            print("Computer chose Scissors")
+            print("Computer chose Scissors.")
         return computerChoice
 
-def findWinner():
-    if computerChoice == 1 and userChoice == 1:
-        print("Draw!")
-    elif computerChoice == 1 and userChoice == 2:
-        print("You win!")
-    elif computerChoice == 1 and userChoice == 3:
-        print("Computer wins!")
-    elif computerChoice == 2 and userChoice == 1:
-        print("Computer wins!")
-    elif computerChoice == 2 and userChoice == 2:
-        print("Draw!")
-    elif computerChoice == 2 and userChoice == 3:
-        print("You win!")
-    elif computerChoice == 3 and userChoice == 1:
-        print("You win!")
-    elif computerChoice == 3 and userChoice == 2:
-        print("Computer wins!")
-    elif computerChoice == 3 and userChoice == 3:
-        print("Draw!")
+# keeping count of the score --->
+playerScore = 0
+computerScore = 0
+tieScore = 0
 
-print(weclomeUser())
-while ifPlay != False:
+def winner():
+
+    global playerScore
+    global computerScore
+    global tieScore
+
+    if playerChoice == computerChoice:
+        print("It's a tie!")
+        tieScore += 1
+    elif playerChoice == 1 and computerChoice == 2:
+        print("Computer wins!")
+        computerScore += 1
+    elif playerChoice == 1 and computerChoice == 3:
+        print("You win!")
+        playerScore += 1
+    elif playerChoice == 2 and computerChoice == 1:
+        print("You win!")
+        playerScore += 1
+    elif playerChoice == 2 and computerChoice == 3:
+        print("Computer wins!")
+        computerScore += 1
+    elif playerChoice == 3 and computerChoice == 1:
+        print("Computer wins!")
+        computerScore += 1
+    elif playerChoice == 3 and computerChoice == 2:
+        print("You win!")
+        playerScore += 1
+
+print(weclomePlayer())
+askPlayer()
+while ifPlay == True:
     showOptions()
-    userChoice()
-    computerChoice()
-    findWinner()
-    askUser()
+    player()
+    computer()
+    winner()
+    askPlayer()
     if ifPlay == False:
+        print()
+        print("Your score: " +      str(playerScore))
+        print("Computer score: " +  str(computerScore))
+        print("Tie score: " +       str(tieScore))
+        print()
         break
-    
-input("Exit...? ")
+print()
+input("Press Enter to Exit...")
