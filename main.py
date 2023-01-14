@@ -19,7 +19,7 @@ def weclomeUser():
     return "Hey " + userName + "!"
 
 
-ifPlay = False
+ifPlay = True
 
 def askUser():
 
@@ -30,7 +30,6 @@ def askUser():
     else:
         ifPlay = False
 
-userChoice = ""
 def showOptions():
 
     if ifPlay == True:
@@ -43,9 +42,19 @@ def showOptions():
         
             """)
 
-    global userChoice
-    userChoice = input("Please choose one of the options above: [1, 2 or 3]: ")
-    return userChoice
+
+def userChoice():
+
+    userChoice = int(input("Please enter your choice [1, 2 or 3]: "))
+    if ifPlay == True:
+        if userChoice == 1 or userChoice == 2 or userChoice == 3:
+            if userChoice == 1:
+                print("You chose Rock")
+            elif userChoice == 2:
+                print("You chose Paper")
+            elif userChoice == 3:
+                print("You chose Scissors")
+            return userChoice
 
 computerChoice = ""
 
@@ -55,19 +64,42 @@ def computerChoice():
 
     if ifPlay == True:
         computerChoice = random.randint(1,3)
-    
-    return computerChoice
+        if computerChoice == 1:
+            print("Computer chose Rock")
+        elif computerChoice == 2:
+            print("Computer chose Paper")
+        elif computerChoice == 3:
+            print("Computer chose Scissors")
+        return computerChoice
 
 def findWinner():
     if computerChoice == 1 and userChoice == 1:
         print("Draw!")
-# main body
+    elif computerChoice == 1 and userChoice == 2:
+        print("You win!")
+    elif computerChoice == 1 and userChoice == 3:
+        print("Computer wins!")
+    elif computerChoice == 2 and userChoice == 1:
+        print("Computer wins!")
+    elif computerChoice == 2 and userChoice == 2:
+        print("Draw!")
+    elif computerChoice == 2 and userChoice == 3:
+        print("You win!")
+    elif computerChoice == 3 and userChoice == 1:
+        print("You win!")
+    elif computerChoice == 3 and userChoice == 2:
+        print("Computer wins!")
+    elif computerChoice == 3 and userChoice == 3:
+        print("Draw!")
 
 print(weclomeUser())
-askUser()
-
 while ifPlay != False:
     showOptions()
+    userChoice()
+    computerChoice()
     findWinner()
+    askUser()
+    if ifPlay == False:
+        break
     
 input("Exit...? ")
