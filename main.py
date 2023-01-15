@@ -128,9 +128,18 @@ while ifPlay == True:
     askPlayer()
     if ifPlay == False:
         print()
+
+        print("Game Stats: ")
+        print("-----------------")
         print("Your score: " +      str(playerScore))
         print("Computer score: " +  str(computerScore))
         print("Tie score: " +       str(tieScore))
+        if playerScore > computerScore:
+            print("Overall winner: You!")
+        elif playerScore < computerScore:
+            print("Overall winner: Computer!")
+        print()
+        print("Thanks for playing!")
         print()
         break
 print()
